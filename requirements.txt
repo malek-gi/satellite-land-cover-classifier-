@@ -90,7 +90,7 @@ lazy_loader==0.2
 lesscpy==0.15.1
 libclang==15.0.6.1
 libusb1==3.0.0
-lxml==4.9.2
+lxml==4.9.2; platform_system != "Linux"
 Markdown==3.4.1
 MarkupSafe==2.1.2
 matplotlib==3.7.1
@@ -126,7 +126,7 @@ progressbar==2.5
 prometheus_client==0.20.0
 promise==2.3
 prompt_toolkit==3.0.47
-protobuf==4.21.4
+protobuf==4.21.3
 psutil==5.9.4
 pure-eval==0.2.2
 pyarrow==19.0.0
