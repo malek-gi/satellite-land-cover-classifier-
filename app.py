@@ -26,8 +26,8 @@ from torchvision.models import resnet50, ResNet50_Weights
 import torch.nn as nn
 
 # Define same model structure
-resnet_model = resnet50(weights=ResNet50_Weights.DEFAULT)
-resnet_model.fc = nn.Sequential(
+my_model = resnet50(weights=ResNet50_Weights.DEFAULT)
+my_model.fc = nn.Sequential(
     nn.Dropout(0.5),
     nn.Linear(resnet_model.fc.in_features, 256),
     nn.ReLU(),
@@ -37,7 +37,7 @@ resnet_model.fc = nn.Sequential(
 
 # Compile the model again (same as before)
 #my_model = torch.compile(resnet_model)
-my_model = resnet_model
+#my_model = resnet_model
 
 # Load the state_dict
 my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
