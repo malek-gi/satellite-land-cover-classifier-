@@ -21,6 +21,7 @@ Original file is located at
 
 #!cp /content/drive/MyDrive/satellite_project/model.pth /content/
 
+import streamlit as st
 import torch
 from torchvision.models import resnet50, ResNet50_Weights
 import torch.nn as nn
