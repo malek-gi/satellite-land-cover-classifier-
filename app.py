@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1ZIjtIRJo7LMCFMx5UVjDCYrfd-FJbPB8
 """
 
-pip install streamlit torch torchvision
+#pip install streamlit torch torchvision
 
 """**Load the Saved Model**"""
 
