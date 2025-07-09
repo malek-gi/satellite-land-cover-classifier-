@@ -7,7 +7,63 @@ Original file is located at
     https://colab.research.google.com/drive/1ZIjtIRJo7LMCFMx5UVjDCYrfd-FJbPB8
 """
 
-#pip install streamlit torch torchvision
+pip install streamlit torch torchvision
+
+"""**Load the Saved Model**"""
+
+from google.colab import files
+saved_model = files.upload()
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+!mv model.pth /content/drive/MyDrive/satellite_project/model.pth
+
+!cp /content/drive/MyDrive/satellite_project/model.pth /content/
+
+import torch
+from torchvision.models import resnet50, ResNet50_Weights
+import torch.nn as nn
+
+# Define same model structure
+resnet_model = resnet50(weights=ResNet50_Weights.DEFAULT)
+resnet_model.fc = nn.Sequential(
+    nn.Dropout(0.5),
+    nn.Linear(resnet_model.fc.in_features, 256),
+    nn.ReLU(),
+    nn.Dropout(0.3),
+    nn.Linear(256, 10)
+)
+
+# Compile the model again (same as before)
+my_model = torch.compile(resnet_model)
+
+# Load the state_dict
+my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
+
+my_model.eval()
+
+"""**Data labels**"""
+
+DATA_LABELS = ["AnnualCrop", "Forest", "HerbaceousVegetation", "Highway", "Industrial",
+               "Pasture", "PermanentCrop", "Residential", "River", "SeaLake"]
+
+"""**Image Preprocessing**"""
+
+from torchvision import transforms
+from torch.utils.data import DataLoader
+
+random_trans224 = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                         std=[0.229, 0.224, 0.225])
+])
+
+"""**Device**"""
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.cuda.is_available()
 
 import streamlit as st
 from PIL import Image
