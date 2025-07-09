@@ -14,12 +14,12 @@ Original file is located at
 from google.colab import files
 saved_model = files.upload()
 
-from google.colab import drive
-drive.mount('/content/drive')
+#from google.colab import drive
+#drive.mount('/content/drive')
 
-!mv model.pth /content/drive/MyDrive/satellite_project/model.pth
+#!mv model.pth /content/drive/MyDrive/satellite_project/model.pth
 
-!cp /content/drive/MyDrive/satellite_project/model.pth /content/
+#!cp /content/drive/MyDrive/satellite_project/model.pth /content/
 
 import torch
 from torchvision.models import resnet50, ResNet50_Weights
