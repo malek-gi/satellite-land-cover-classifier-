@@ -45,7 +45,8 @@ my_model.fc = nn.Sequential(
 #my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
 #my_model.eval()
 try:
-    my_model = torch.load("model.pth", map_location="cpu")
+    #my_model = torch.load("model.pth", map_location="cpu")
+    my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
     my_model.eval()
 except Exception as e:
     st.error(f"Error loading model: {e}")
