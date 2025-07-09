@@ -1,6 +1,6 @@
 # Core packages for PyTorch and model development
 torch==2.7.1
-torchvision==0.18.1
+torchvision==0.22.1
 torchaudio==2.7.1
 torchvision.models==0.15.1
 torchvision.transforms
