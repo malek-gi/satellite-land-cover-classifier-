@@ -11,8 +11,8 @@ Original file is located at
 
 """**Load the Saved Model**"""
 
-from google.colab import files
-saved_model = files.upload()
+#from google.colab import files
+#saved_model = files.upload()
 
 #from google.colab import drive
 #drive.mount('/content/drive')
