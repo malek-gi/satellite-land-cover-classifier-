@@ -27,14 +27,14 @@ from torchvision.models import resnet50, ResNet50_Weights
 import torch.nn as nn
 
 # Define same model structure
-my_model = resnet50(weights=ResNet50_Weights.DEFAULT)
-my_model.fc = nn.Sequential(
-    nn.Dropout(0.5),
-    nn.Linear(my_model.fc.in_features, 256),
-    nn.ReLU(),
-    nn.Dropout(0.3),
-    nn.Linear(256, 10)
-)
+##my_model = resnet50(weights=ResNet50_Weights.DEFAULT)
+##my_model.fc = nn.Sequential(
+##    nn.Dropout(0.5),
+##    nn.Linear(my_model.fc.in_features, 256),
+##    nn.ReLU(),
+##    nn.Dropout(0.3),
+##    nn.Linear(256, 10)
+##)
 
 # Compile the model again (same as before)
 #my_model = torch.compile(resnet_model)
@@ -44,12 +44,32 @@ my_model.fc = nn.Sequential(
 
 #my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
 #my_model.eval()
-try:
-    #my_model = torch.load("model.pth", map_location="cpu")
-    my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
-    my_model.eval()
-except Exception as e:
-    st.error(f"Error loading model: {e}")
+
+##try:
+##    #my_model = torch.load("model.pth", map_location="cpu")
+##    my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
+##    my_model.eval()
+##except Exception as e:
+##    st.error(f"Error loading model: {e}")
+
+state_dict = torch.load("model.pth", map_location="cpu")
+
+# Remove "_orig_mod." prefix from all keys
+cleaned_state_dict = {k.replace("_orig_mod.", ""): v for k, v in state_dict.items()}
+
+# Build model
+model = resnet50(weights=ResNet50_Weights.DEFAULT)
+model.fc = nn.Sequential(
+    nn.Dropout(0.5),
+    nn.Linear(model.fc.in_features, 256),
+    nn.ReLU(),
+    nn.Dropout(0.3),
+    nn.Linear(256, 10)
+)
+
+# Load the cleaned state_dict
+model.load_state_dict(cleaned_state_dict)
+model.eval()
 
 """**Data labels**"""
 
