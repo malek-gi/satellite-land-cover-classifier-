@@ -9,8 +9,6 @@ Original file is located at
 
 #pip install streamlit torch torchvision
 
-"""**Load the Saved Model**"""
-
 #from google.colab import files
 #saved_model = files.upload()
 
@@ -71,12 +69,8 @@ my_model.fc = nn.Sequential(
 my_model.load_state_dict(cleaned_state_dict)
 my_model.eval()
 
-"""**Data labels**"""
-
 DATA_LABELS = ["AnnualCrop", "Forest", "HerbaceousVegetation", "Highway", "Industrial",
                "Pasture", "PermanentCrop", "Residential", "River", "SeaLake"]
-
-"""**Image Preprocessing**"""
 
 from torchvision import transforms
 from torch.utils.data import DataLoader
@@ -87,8 +81,6 @@ random_trans224 = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406],
                          std=[0.229, 0.224, 0.225])
 ])
-
-"""**Device**"""
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.cuda.is_available()
