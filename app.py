@@ -91,7 +91,7 @@ uploaded_file = st.file_uploader("Upload a satellite image", type=["jpg", "png"]
 
 if uploaded_file:
     try:
-        label, image = predict_image(my_model, random_trans224, DATA_LABELS, uploaded_file)
+        label, image = predict_image(my_model, random_trans224, DATA_LABELS, device, uploaded_file)
         st.image(image, caption=f"Predicted: {label}")
     except Exception as e:
         st.error(f"⚠️ Error during prediction: {e}")
