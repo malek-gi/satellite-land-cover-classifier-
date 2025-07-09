@@ -36,7 +36,8 @@ resnet_model.fc = nn.Sequential(
 )
 
 # Compile the model again (same as before)
-my_model = torch.compile(resnet_model)
+#my_model = torch.compile(resnet_model)
+my_model = resnet_model
 
 # Load the state_dict
 my_model.load_state_dict(torch.load("model.pth", map_location="cpu"))
